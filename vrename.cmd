@@ -27,7 +27,7 @@ for /f "delims=( tokens=1,2" %%f in (%tempDir%\renames.txt) do (
 
     if !src! neq !dest! (
         @echo on
-        rename !src! !dest!
+        move !src! !dest!
         @echo off
     )
 )
