@@ -1,15 +1,26 @@
-@echo off
-REM -- Create a temporary directory for command scripts
-REM -- 
-REM -- Usage: get-tempdir <environment_variable_name>
-REM --
-REM -- Determines non-existent temporary directory, and sets the given
-REM -- environment variable to that directory name.
+@echo off 
 
-if x%1x equ xx (
-    echo get-tempdir: Specify target environment variable to set with temporary directory name.
-    exit /b 1
-)
+goto :start
+:help
+    echo.get-tempdir - Creates a temporary directory for command scripts
+    echo.
+    echo.Usage: get-tempdir [-h] ^<environment_variable_name^>
+    echo.
+    echo.  -h   Print help and exit
+    echo.
+    echo.Determines non-existent temporary directory, and sets the given environment
+    echo.variable to that directory name. If no arguments are given, then the temporary
+    echo.directory name is echoed to stdout.
+    goto :eof
+
+
+:start
+REM == Check for help option
+
+if    x%1x equ x-?x (call :help & goto :eof)
+if    x%1x equ x/?x (call :help & goto :eof)
+if /i x%1x equ x-hx (call :help & goto :eof)
+if /i x%1x equ x/hx (call :help & goto :eof)
 
 :attempt
 for /f "delims=" %%g in ('powershell -command "[string][guid]::NewGuid()"') do (
@@ -17,7 +28,13 @@ for /f "delims=" %%g in ('powershell -command "[string][guid]::NewGuid()"') do (
 )
 
 mkdir %__get_tempdir__% || goto :attempt
-set %1=%__get_tempdir__%
+
+if x%1x equ xx (
+    echo %__get_tempdir__%
+) else (
+    set %1=%__get_tempdir__%
+)
+
 set __get_tempdir__=
 
 exit /b 0
