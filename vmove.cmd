@@ -63,7 +63,7 @@ if %showHelp% neq 0 (
 REM // Create move file for editing
 
 for /f "delims=" %%f in ('dir/b %sourceGlobs%') do (
-    echo>>%tempDir%\moves.txt "%%f" ^(from "%%f"^)
+    echo>>%tempDir%\moves.txt "%%f" ^< from "%%f"
 )
 
 if not defined editor set editor=notepad.exe
@@ -79,12 +79,11 @@ if %forceClobber% equ 0 (
 
 REM // Loop through the lines in the move file 
 
-for /f "delims=( tokens=1,2" %%f in (%tempDir%\moves.txt) do (
+for /f "delims=< tokens=1,2" %%f in (%tempDir%\moves.txt) do (
     set dest=%%f
     set src=%%g
 
-    set src=!src:from =!
-    set src=!src:~0,-1!
+    set src=!src: from =!
     set dest=!dest:~0,-1!
 
     if !src! neq !dest! (
