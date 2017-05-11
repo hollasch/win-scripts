@@ -1,4 +1,4 @@
-@setlocal && echo off
+@setlocal enabledelayedexpansion && echo off
 
 @REM // This tool uses gs (GhostScript) to concatenate an arbitrary number of
 @REM // PDF files into a single output. Run `pdfcat --help` for usage.
@@ -18,14 +18,20 @@ if %errorlevel% gtr 0 (
 )
 
 set output=%1
+set output=%output:.pdf=%.pdf
 shift
 
 :gather_sources
     if "%1" equ "" goto :gather_end
-    set sources=%sources% %1
+    set _glob=
+    for /f "delims=" %%g in ('dir /b %1') do (
+        set _glob=!_glob! %%g
+    )
+    set sources=%sources%%_glob%
     shift
     goto :gather_sources
 :gather_end
+set _glob=
 
 if "%sources%" equ "" (
     echo 1>&2ERROR: No source files specified.
