@@ -51,7 +51,7 @@ if not defined sources (
     goto :help
 )
 
-echo call gs -dNOPAUSE %batchOption% -sDEVICE=pdfwrite -sOUTPUTFILE=%output% %sources%
+call gs -dNOPAUSE %batchOption% -sDEVICE=pdfwrite -sOUTPUTFILE=%output% %sources%
 exit /b 0
 
 
