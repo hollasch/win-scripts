@@ -24,7 +24,7 @@ shift
 :gather_sources
     if "%1" equ "" goto :gather_end
     set _glob=
-    for /f "delims=" %%g in ('dir /b %1') do (
+    for /f "delims=" %%g in ('dir /b /on %1') do (
         set _glob=!_glob! %%g
     )
     set sources=%sources%%_glob%
