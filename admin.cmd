@@ -13,9 +13,9 @@ REM // Check for admin rights
 net file 1>nul 2>&1
 
 if %errorlevel% equ 0 (
-    %*
+    call %*
 ) else (
     echo Launching Administrator shell.
     powershell -ex unrestricted ^
-        -Command "Start-Process -Verb RunAs -FilePath '%comspec%' -ArgumentList '/k cd \"%cd%\" & %*'"
+        -Command "Start-Process -Verb RunAs -FilePath '%comspec%' -ArgumentList '/k cd /d \"%cd%\" & %*'"
 )
