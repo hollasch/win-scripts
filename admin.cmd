@@ -17,5 +17,5 @@ if %errorlevel% equ 0 (
 ) else (
     echo Launching Administrator shell.
     powershell -ex unrestricted ^
-        -Command "Start-Process -Verb RunAs -FilePath '%comspec%' -ArgumentList '/k cd /d \"%cd%\" & %*'"
+        -Command "Start-Process -Verb RunAs -FilePath '%comspec%' -ArgumentList '/k cd /d \"%cd:\=/%\" & %*'"
 )
