@@ -18,23 +18,25 @@ set batchOption=-dBATCH
 
 @REM // Scan through all command-line arguments.
 :scan_args
-    if "%1" equ "" goto :args_end
+    set arg="%~1"
 
-    if /i "%1" equ "/h"       goto :help
-    if /i "%1" equ "/help"    goto :help
-    if /i "%1" equ "-h"       goto :help
-    if /i "%1" equ "-help"    goto :help
-    if /i "%1" equ "--help"   goto :help
+    if %arg% equ "" goto :args_end
 
-    if /i "%1" equ "--remain" (
+    if /i %arg% equ "/h"       goto :help
+    if /i %arg% equ "/help"    goto :help
+    if /i %arg% equ "-h"       goto :help
+    if /i %arg% equ "-help"    goto :help
+    if /i %arg% equ "--help"   goto :help
+
+    if /i %arg% equ "--remain" (
         set "batchOption= "
     ) else if not defined output (
-        set output=%1
-        set output=!output:.pdf=!.pdf
+        set output=%~1
+        set output="!output:.pdf=!.pdf"
     ) else (
         set glob=
-        for /f "delims=" %%g in ('dir /b /on %1') do (
-            set glob=!glob! %%g
+        for /f "delims=" %%g in ('dir /b /on %arg%') do (
+            set glob=!glob! "%%g"
         )
         set sources=!sources!!glob!
     )
