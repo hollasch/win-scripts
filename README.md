@@ -5,6 +5,7 @@ This is a collection of Windows command shell (.cmd) scripts that I find useful.
 
 ### Scripts
 - `admin`        -- Execute command as administrator
+- `clip-edit`    -- Invoke %EDITOR% to place content on the clipboard
 - `get-tempfile` -- Creates a temporary file (or directory) name for command scripts
 - `pdfcat`       -- Concatenates multiple PDF files into one
 - `touch`        -- Creates/updates the timestamp of a given file
