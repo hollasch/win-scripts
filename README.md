@@ -4,12 +4,12 @@ Useful Windows Command Shell Scripts
 This is a collection of Windows command shell (.cmd) scripts that I find useful.
 
 ### Scripts
-- `admin`       -- Execute command as administrator
-- `get-tempdir` -- Creates a temporary directory for command scripts
-- `pdfcat`      -- Concatenates multiple PDF files into one
-- `touch`       -- Creates/updates the timestamp of a given file
-- `upsearch`    -- Locate nearest target file upwards from current working directory
-- `vmove`       -- Batch move/rename utility using the preferred %EDITOR%
+- `admin`        -- Execute command as administrator
+- `get-tempfile` -- Creates a temporary file (or directory) name for command scripts
+- `pdfcat`       -- Concatenates multiple PDF files into one
+- `touch`        -- Creates/updates the timestamp of a given file
+- `upsearch`     -- Locate nearest target file upwards from current working directory
+- `vmove`        -- Batch move/rename utility using the preferred %EDITOR%
 
 ### Snippets
 - `admin-launch.cmd` -- Demonstrates how to auto-relaunch a script with admin priviledges

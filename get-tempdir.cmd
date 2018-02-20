@@ -17,6 +17,7 @@ goto :start
 :start
 REM == Check for help option
 
+if x%1x equ xx goto :attempt
 if    x%1x equ x-?x (call :help & goto :eof)
 if    x%1x equ x/?x (call :help & goto :eof)
 if /i x%1x equ x-hx (call :help & goto :eof)

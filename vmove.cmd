@@ -9,7 +9,11 @@ REM //
 REM // This command uses the EDITOR environment variable to launch the user's
 REM // preferred editor.
 
-call get-tempdir tempDir
+call get-tempfile tempDir
+mkdir %tempDir% || (
+    echo vmove: Unable to create temporary directory "%tempDir%". 1>&2
+    exit /b 1
+)
 
 REM // Process arguments
 
