@@ -1,1 +1,1 @@
-@rundll32 sysdm.cpl,EditEnvironmentVariables
+@start rundll32 sysdm.cpl,EditEnvironmentVariables
