@@ -8,6 +8,7 @@ This is a collection of Windows command shell (.cmd) scripts that I find useful.
 - `clip-edit`    -- Invoke %EDITOR% to place content on the clipboard
 - `envgui`       -- Launch the Windows environment variable GUI
 - `get-tempfile` -- Creates a temporary file (or directory) name for command scripts
+- `pathlist.py`  -- Pretty report of current path list, noting non-existent and duplicate entries
 - `pdfcat`       -- Concatenates multiple PDF files into one
 - `sleep`        -- One-liner simple sleep (in seconds)
 - `touch`        -- Creates/updates the timestamp of a given file
