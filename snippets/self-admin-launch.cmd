@@ -1,18 +1,43 @@
-@setlocal & echo off
+@setlocal EnableDelayedExpansion & echo off
 
-REM -- Check for admin rights and self-relaunch as admin if necessary.
-REM --
-REM -- Note: this script does not work if it's invoked on a network-mapped drive. To do that, you
-REM -- would need to get the full network path (parsing the output of `net map` perhaps?) and then
-REM -- construct the fully-qualified name of the script file.
+REM  ===========================================================================================
+REM  Check for admin rights and self-relaunch as admin if necessary.
+REM  ===========================================================================================
 
-net file 1>nul 2>&1 && goto :admin
-    echo Re-launching as Admin...
-    powershell -ex unrestricted -Command "Start-Process -Verb RunAs -FilePath '%comspec%' -ArgumentList '/k %~fnx0 %*'"
+net session 1>nul 2>&1 && goto :adminMode
+
+@REM -----------------------------------------------------------------------------------------------
+echo Re-launching with administrator privileges.
+
+@REM -- Get the full UNC path of this script. We need to do this because drive mappings are not
+@REM -- available to administrator shells.
+
+net use %~d0 1>nul 2>&1
+if %ErrorLevel% equ 0 (
+    for /f "tokens=1,2,*" %%a in ('net use %~d0 ^| findstr -c:"Remote name"') do (
+        set remotePath=%%c
+    )
+    set scriptPath=!remotePath!%~pnx0
+) else (
+    set scriptPath=%~f0
+)
+
+set command=%scriptPath% %*
+
+powershell -ex unrestricted ^
+    -Command "Start-Process -Verb RunAs -FilePath '%comspec%' -ArgumentList '/k %command%'"
+
+goto :eof
+
+
+@REM -----------------------------------------------------------------------------------------------
+:adminMode
+
+net session 1>nul 2>&1
+if %ErrorLevel% neq 0 (
+    echo ERROR: Failed to run 'net session'. It seems that this script failed.
     goto :eof
-:admin
+)
 
-echo Running as admin.
+echo Verified running with administrator privileges.
 echo Arguments: %*
-
-net file
