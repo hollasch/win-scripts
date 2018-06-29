@@ -9,6 +9,7 @@ This is a collection of Windows command shell (.cmd) scripts that I find useful.
 - `envgui`       -- Launch the Windows environment variable GUI
 - `get-tempfile` -- Creates a temporary file (or directory) name for command scripts
 - `pdfcat`       -- Concatenates multiple PDF files into one
+- `sleep`        -- One-liner simple sleep (in seconds)
 - `touch`        -- Creates/updates the timestamp of a given file
 - `upsearch`     -- Locate nearest target file upwards from current working directory
 - `vmove`        -- Batch move/rename utility using the preferred %EDITOR%
