@@ -23,9 +23,7 @@ REM // -------------------------------------------------------------------------
 
 echo Invoking editor for clipboard.
 
-if "%1" neq "" (
-    set EDITOR=%*
-) else if not defined EDITOR (
+if not defined EDITOR (
     set EDITOR=notepad.exe
 )
 
