@@ -70,9 +70,9 @@ for /f "delims=" %%f in ('dir/b %sourceGlobs%') do (
     echo>>%tempDir%\moves.txt "%%f" ^< from "%%f"
 )
 
-if not defined editor set editor=notepad.exe
+if not defined editor set EDITOR=notepad.exe
 
-"%editor:"=%" %tempDir%\moves.txt
+call "%EDITOR:"=%" %tempDir%\moves.txt
 
 
 if %forceClobber% equ 0 (
