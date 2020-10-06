@@ -38,8 +38,8 @@ REM // See https://stackoverflow.com/a/15747067/566185
 
 cscript /nologo /e:JScript "%~f0" >%tempFileName%
 
-call %EDITOR% %tempFileName% || (
-    echo get-edit.cmd: Unable to invoke "%EDITOR%". Check EDITOR environment variable. 1>&2
+call "%EDITOR:"=%" %tempFileName% || (
+    echo clip-edit.cmd: Unable to invoke "%EDITOR:"=%". Check EDITOR environment variable. 1>&2
     pause
     exit /b 1
 )
