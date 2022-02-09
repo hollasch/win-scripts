@@ -18,6 +18,7 @@ foundDuplicates = False
 foundNonexistent = False
 
 pathVar = os.environ['PATH']
+pathSize = len(pathVar);
 pathList = pathVar.split(';')
 
 for n, path in enumerate(pathList):
@@ -48,3 +49,5 @@ if foundDuplicates or foundNonexistent:
 
     if foundNonexistent:
         print ("! Non-existent directories")
+
+print ("\nPath Size: {}".format(pathSize))
