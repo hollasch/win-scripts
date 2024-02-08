@@ -9,13 +9,14 @@ REM //
 REM // This command uses the EDITOR environment variable to launch the user's
 REM // preferred editor.
 
-call get-tempfile tempDir
-mkdir %tempDir% || (
-    echo vmove: Unable to create temporary directory "%tempDir%". 1>&2
-    exit /b 1
-)
-
 REM // Process arguments
+
+if "%1" equ "--go" (
+    shift
+) else (
+    start "VMove %*" /MIN cmd /C vmove --go %*
+    goto :eof
+)
 
 set noExecute=0
 set forceClobber=0
@@ -44,6 +45,11 @@ if "%1" equ "" goto :labelArgsDone
 
 :labelArgsDone
 
+call get-tempfile tempDir
+mkdir %tempDir% || (
+    echo vmove: Unable to create temporary directory "%tempDir%". 1>&2
+    exit /b 1
+)
 
 if %showHelp% neq 0 (
     echo.vmove: Batch file move / rename
